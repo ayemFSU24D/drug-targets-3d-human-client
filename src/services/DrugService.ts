@@ -9,7 +9,7 @@ export const getDrugData = async (drugName: string) => {
     const token = await auth.currentUser?.getIdToken();
     if (!token) throw new Error("User is not logged in");
 
-    const res = await fetch(`http://localhost:3000/auth-api/drug/${drugName}/organs-auth`, {
+    const res = await fetch(`https://express-one-tawny.vercel.app/auth/drug/${drugName}/organs-auth`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +33,7 @@ export const getDrugData = async (drugName: string) => {
 
 export const getDrugList = async (): Promise<string[]> => {
   try {
-    const res = await fetch("http://localhost:3000/api/drug/list");
+    const res = await fetch("https://express-one-tawny.vercel.app/drug/list");
 
     if (!res.ok) throw new Error("Failed to fetch drug list");
 
