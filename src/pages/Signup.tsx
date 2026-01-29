@@ -5,32 +5,26 @@ import GoogleLoginButton from "../components/GoogleLoginButton";
 import EmailLogin from "../components/EmailLogin";
 import { logout } from "../auth/logout";
 
+
 const Signup: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
+  const [mode, setMode] = useState<"login" | "signup">("login");
+  const [error, setError] = useState<string | null>(null);
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, setUser);
     return unsubscribe;
   }, []);
 
+
+
   return (
     <div className="min-h-[70vh] flex items-center justify-center">
-      <div className="w-full max-w-md bg-white p-6 rounded-lg shadow space-y-6">
+      <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg space-y-6">
 
-        {/* Header */}
-        <div className="text-center">
-          <h1 className="text-2xl font-bold">
-            {user ? "Account" : "Log in"}
-          </h1>
-          <p className="text-gray-600 text-sm mt-1">
-            {user
-              ? "You are currently logged in"
-              : "Log in to access the 3D model and features"}
-          </p>
-        </div>
-
-        {/* Content */}
         {user ? (
+          /* LOGGED IN */
           <div className="space-y-4 text-center">
             <p className="text-gray-700">
               Logged in as
@@ -40,30 +34,85 @@ const Signup: React.FC = () => {
 
             <button
               onClick={logout}
-              className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition"
+              className="w-full bg-black text-white py-2 rounded hover:bg-gray-900 transition"
             >
               Log out
             </button>
           </div>
         ) : (
-          <div className="space-y-4">
-            <GoogleLoginButton />
+          /* NOT LOGGED IN */
+          <>
+            {/* Toggle */}
+            <div className="space-y-4">
 
-            <div className="flex items-center gap-2 text-gray-400 text-sm">
-              <div className="flex-1 h-px bg-gray-300" />
-              or
-              <div className="flex-1 h-px bg-gray-300" />
+              <p className="text-gray-600 text-sm text-center">
+                {mode === "login"
+                  ? "Log in to access the 3D model and features"
+                  : "Create an account to get started"}
+              </p>
             </div>
 
-            <EmailLogin />
-          </div>
+            {/* Providers */}
+            <div className="space-y-6">
+
+  {/* Title */}
+  <h2 className="text-2xl font-semibold text-center">
+    {mode === "login" ? "Log in" : "Sign up"}
+  </h2>
+
+  {/* Google */}
+  <div className="border rounded-xl px-4 py-3 hover:bg-gray-50 transition text-center cursor-pointer">
+    <GoogleLoginButton />
+  </div>
+
+  {/* Divider */}
+  <div className="flex items-center gap-3 text-gray-400 text-sm">
+    <div className="flex-1 h-px bg-gray-300" />
+    or continue with email
+    <div className="flex-1 h-px bg-gray-300" />
+  </div>
+
+  {/* Email box */}
+  <div className="border rounded-xl p-4 space-y-3">
+
+  {error && (
+    <div className="text-sm text-red-600 bg-red-50 p-2 rounded">
+      {error}
+    </div>
+  )}
+
+  <EmailLogin mode={mode} setError={setError} setMode={setMode} />
+
+  {mode === "login" && (
+    <p className="text-sm text-center text-gray-600">
+      Don’t have an account?{" "}
+      <button
+        onClick={() => {
+          setMode("signup");
+          setError(null);
+        }}
+        className="font-medium hover:underline"
+      >
+        Create one
+      </button>
+    </p>
+  )}
+
+</div>
+
+
+</div>
+
+          </>
         )}
+
       </div>
     </div>
   );
 };
 
 export default Signup;
+
 
 
 
