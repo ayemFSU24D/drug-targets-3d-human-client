@@ -17,5 +17,5 @@
 
     "types": ["node", "@react-three/fiber", "three"]
   },
-  "include": ["src"]
+  "include": ["src", "tailwind.config.js"]
 }
