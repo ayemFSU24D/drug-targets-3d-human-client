@@ -1,13 +1,13 @@
-import { getDrugData, getDrugList } from './services/DrugService';
+import { getDrugData, getDrugList } from '../services/DrugService';
 import { useState, useEffect, useRef } from "react";
-import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import { ProteinPopup } from "./ProteinPopup";
+import { ProteinPopup } from "../ProteinPopup";
 import { Mesh } from 'three';
-import { AmbientLight, DirectionalLight } from './r3f-wrappers';
-import { auth } from "./firebase";
+import { AmbientLight, DirectionalLight } from '../r3f-wrappers';
+import { Canvas } from "@react-three/fiber";
+import { auth } from "../firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
-import { ResponsiveModel } from './components/ResponsiveModel';
+import { ResponsiveModel } from '../components/ResponsiveModel';
 import { NavLink } from 'react-router-dom';
 
 type DrugData = {
