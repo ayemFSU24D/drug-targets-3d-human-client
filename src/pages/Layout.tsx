@@ -63,29 +63,29 @@ export const Layout = () => {
 
       <li>
         {!user ? (
-        <NavLink
-          to="/Signup"
-          className={({ isActive }) =>
-            isActive
-              ? "text-cyan-400 font-semibold"
-              : "hover:text-cyan-300 transition"
-          }
-        >
-          Log in / Sign up
-        </NavLink>
-      ) : (
-        
-        <NavLink
-        to="/Signup"
-        className={({ isActive }) =>
-          isActive
+  <NavLink
+    to="/Signup"
+    className={({ isActive }) =>
+      isActive
         ? "text-cyan-400 font-semibold"
         : "hover:text-cyan-300 transition"
-      }
-      >
-          Signed in
-        </NavLink>
-        )}
+    }
+  >
+    Log in / Sign up
+  </NavLink>
+) : (
+  <NavLink
+    to="/Signup"
+    className={({ isActive }) =>
+      isActive
+        ? "text-cyan-400 font-semibold"
+        : "hover:text-cyan-300 transition"
+    }
+  >
+    {user.email}
+  </NavLink>
+)}
+
         </li>
 
       <li>
