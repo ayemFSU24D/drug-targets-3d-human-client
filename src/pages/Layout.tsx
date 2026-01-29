@@ -88,9 +88,15 @@ export const Layout = () => {
           <div className="flex items-center gap-4 md:hidden">
 
             {/* Account icon ONLY mobile */}
-            <NavLink to="/Signup" className="text-cyan-400 hover:text-cyan-300 transition text-xl">
-              👤
-            </NavLink>
+            {user && (
+  <NavLink
+    to="/Signup"
+    className="md:hidden text-cyan-400 hover:text-cyan-300 transition text-xl"
+  >
+    👤
+  </NavLink>
+)}
+
 
             {/* Hamburger */}
             <button
