@@ -1,24 +1,47 @@
 import { NavLink, Outlet } from "react-router-dom";
+import { onAuthStateChanged, User } from "firebase/auth";
+import { auth } from "../firebase";
+import { useEffect, useState } from "react";
 
 export const Layout = () => {
+
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, setUser);
+    return unsubscribe;
+  }, []);
+  
   return (
+    
     <div className="flex flex-col min-h-screen">
       {/* Header */}
-      <header className="bg-slate-100 text-slate-700 border-b border-slate-200">
-  <nav className="container mx-auto flex justify-between items-center py-4 px-6">
-    
-    <div className="text-xl font-bold text-slate-800">
+      <header className="sticky top-0 z-50 bg-slate-950/70 backdrop-blur-xl border-b border-white/10">
+  <nav className="max-w-7xl mx-auto flex justify-between items-center py-4 px-6 text-white">
+
+    <div className="text-xl font-bold tracking-wide">
+
+      <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "text-cyan-400 font-semibold"
+              : "hover:text-cyan-300 transition"
+          }
+        >
       Drug Targets 3D Human
+          </NavLink>
     </div>
 
-    <ul className="flex space-x-6">
+    <ul className="flex space-x-8 text-slate-300">
+
       <li>
         <NavLink
           to="/"
           className={({ isActive }) =>
             isActive
-              ? "text-teal-600 font-semibold"
-              : "hover:text-teal-500 transition"
+              ? "text-cyan-400 font-semibold"
+              : "hover:text-cyan-300 transition"
           }
         >
           Home
@@ -30,8 +53,8 @@ export const Layout = () => {
           to="/ModelPage"
           className={({ isActive }) =>
             isActive
-              ? "text-teal-600 font-semibold"
-              : "hover:text-teal-500 transition"
+              ? "text-cyan-400 font-semibold"
+              : "hover:text-cyan-300 transition"
           }
         >
           ModelPage
@@ -39,34 +62,49 @@ export const Layout = () => {
       </li>
 
       <li>
+        {!user ? (
         <NavLink
           to="/Signup"
           className={({ isActive }) =>
             isActive
-              ? "text-teal-600 font-semibold"
-              : "hover:text-teal-500 transition"
+              ? "text-cyan-400 font-semibold"
+              : "hover:text-cyan-300 transition"
           }
         >
-          Sign up
+          Log in / Sign up
         </NavLink>
-      </li>
+      ) : (
+        
+        <NavLink
+        to="/Signup"
+        className={({ isActive }) =>
+          isActive
+        ? "text-cyan-400 font-semibold"
+        : "hover:text-cyan-300 transition"
+      }
+      >
+          Signed in
+        </NavLink>
+        )}
+        </li>
 
       <li>
         <NavLink
           to="/Contact"
           className={({ isActive }) =>
             isActive
-              ? "text-teal-600 font-semibold"
-              : "hover:text-teal-500 transition"
+              ? "text-cyan-400 font-semibold"
+              : "hover:text-cyan-300 transition"
           }
         >
           Contact us
         </NavLink>
       </li>
-    </ul>
 
+    </ul>
   </nav>
 </header>
+
 
 
       {/* Main content */}
