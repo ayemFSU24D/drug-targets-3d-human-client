@@ -16,8 +16,8 @@ export const Layout = () => {
     <div className="flex flex-col min-h-screen">
 
       {/* HEADER */}
-      <header className="sticky top-0 z-50 bg-slate-950/70 backdrop-blur-xl border-b border-white/10">
-        <nav className="max-w-7xl mx-auto flex justify-between items-center py-4 px-6 text-white">
+      <header className="sticky top-0 z-50 bg-[rgb(52,58,64)] backdrop-blur-xl border-b border-white/10">
+        <nav className="max-w-7xl mx-auto flex justify-between items-center py-4 px-6 text-[rgb(253,126,0)]">
 
           {/* Logo */}
           <NavLink
@@ -28,7 +28,7 @@ export const Layout = () => {
           </NavLink>
 
           {/* DESKTOP MENU */}
-          <ul className="hidden md:flex space-x-8 text-slate-300">
+          <ul className="hidden md:flex space-x-8 text-white">
 
             <li>
               <NavLink
